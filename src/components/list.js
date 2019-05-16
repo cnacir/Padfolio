@@ -1,21 +1,22 @@
 import React from "react";
 import FolioCard from './card';
 
-const List = ({title}) => {
+const List = ({title, cards}) => {
 	return(
-		<div style={styles.container}>
+		<div style={styles.listContainer}>
 			<h4>{title}</h4>
-			<FolioCard/>
+			{ cards.map(card => <FolioCard text={card.text}/>)}
 		</div>
 	);
 };
 
 const styles = {
-	container: {
-		backgroundColor: "grey",
+	listContainer: {
+		backgroundColor: "#dfe1e6",
 		borderRadius: 3,
 		width: 300,
-		padding: 6
+		padding: 8,
+		margin: 10
 	}
 };
 
