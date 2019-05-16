@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import List from './components/list';
+import ListButton from './components/button';
 import { connect } from 'react-redux';
 import './App.css';
 
@@ -11,7 +12,9 @@ class App extends Component {
   	return (
     	<div className="App">
 				<div style={styles.appListContainer}>
-					{lists.map(list => <List title={list.title} cards={list.cards}/>)}
+					{lists.map(list => <List key={list.id} title={list.title} cards={list.cards}/>
+					)}
+					<ListButton list/>
 				</div>
     	</div>
   	);
@@ -21,7 +24,7 @@ class App extends Component {
 const styles = {
 	appListContainer: {
 		display: "flex",
-		flexDirection: "row"
+		flexDirection: "row",
 	}
 }
 
