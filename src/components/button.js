@@ -3,9 +3,11 @@ import Icon from "@material-ui/core/Icon";
 import TextArea from "react-textarea-autosize";
 import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
+import { connect } from 'react-redux';
+import { addList, addCard } from '../actions';
 
 
-class ListButton extends React.Component {
+class ActionButton extends React.Component {
 
 	state = {
 		formIsOpen: false,
@@ -24,6 +26,28 @@ class ListButton extends React.Component {
 		this.setState({
 			text: e.target.value
 		});
+	};
+
+	addNewList = () => {
+		const { dispatch } = this.props;
+		const { text } = this.state;
+
+		if (text) {
+			dispatch(addList(text))
+		};
+
+		return
+	};
+
+	addNewCard = () => {
+		const { dispatch, listID } = this.props;
+		const { text } = this.state;
+
+		if (text) {
+			dispatch(addCard(listID, text))
+		};
+
+		return
 	};
 
 	renderForm = () => {
@@ -57,7 +81,9 @@ class ListButton extends React.Component {
 							</TextArea>
 						</Card>
 						<div style={styles.formButtons}>
-							<Button variant="contained"
+							<Button
+							onMouseDown={list ? this.addNewList : this.addNewCard}
+							variant="contained"
 							style={{color: "white", backgroundColor: "#5aac44"}}>
 							{buttonName}
 							</Button>
@@ -112,4 +138,4 @@ const styles = {
 		alignItems: "center",
 	}
 };
-export default ListButton;
+export default connect()(ActionButton);
