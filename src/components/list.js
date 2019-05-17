@@ -2,14 +2,23 @@ import React from "react";
 import FolioCard from './card';
 import ActionButton from  './button';
 import { Droppable } from 'react-beautiful-dnd';
+import styled from 'styled-components';
+
+const ListContainer = styled.div`
+	background-color: #dfe1e6;
+	border-radius: 3px;
+	height: 100%;
+	width: 300px;
+	padding: 8px;
+	margin: 10px;
+`;
 
 const List = ({title, cards, listID}) => {
 	return (
 		<Droppable droppableId={String(listID)}>
 			{provided => (
-					<div
+					<ListContainer
 						ref={provided.innerRef}
-						style={styles.listContainer}
 						{...provided.droppableProps}
 					>
 						<h4>{title}</h4>
@@ -20,24 +29,14 @@ const List = ({title, cards, listID}) => {
 								id={card.id}
 								index={idx}
 							/>
-						)};
-						<ActionButton listID={listID}/>
+						)}
 						{provided.placeholder}
-					</div>
+						<ActionButton listID={listID}/>
+					</ListContainer>
 				)}
 		</Droppable>
 	);
 };
 
-const styles = {
-	listContainer: {
-		backgroundColor: "#dfe1e6",
-		borderRadius: 3,
-		height: "100%",
-		width: 300,
-		padding: 8,
-		margin: 10
-	}
-};
 
 export default List;

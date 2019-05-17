@@ -135,6 +135,7 @@ const styles = {
 		cursor: "pointer",
 		height: 20,
 		width: 275,
+		margin: 5,
 		marginTop: 10,
 		borderRadius: 3
 	},
