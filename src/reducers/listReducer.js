@@ -70,7 +70,7 @@ const listReducer = (state = initialState, action) => {
 						cards: [...list.cards, newCard]
 				}
 				} else {
-				return list
+					return list
 				};
 			});
 			return newState

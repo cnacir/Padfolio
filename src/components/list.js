@@ -1,19 +1,31 @@
 import React from "react";
 import FolioCard from './card';
 import ActionButton from  './button';
+import { Droppable } from 'react-beautiful-dnd';
 
 const List = ({title, cards, listID}) => {
-	return(
-		<div style={styles.listContainer}>
-			<h4>{title}</h4>
-			{ cards.map(card =>
-				<FolioCard
-					key={card.id}
-					text={card.text}
-				/>
-			)}
-			<ActionButton listID={listID}/>
-		</div>
+	return (
+		<Droppable droppableId={String(listID)}>
+			{provided => (
+					<div
+						ref={provided.innerRef}
+						style={styles.listContainer}
+						{...provided.droppableProps}
+					>
+						<h4>{title}</h4>
+						{cards.map((card, idx) =>
+							<FolioCard
+								key={card.id}
+								text={card.text}
+								id={card.id}
+								index={idx}
+							/>
+						)};
+						<ActionButton listID={listID}/>
+						{provided.placeholder}
+					</div>
+				)}
+		</Droppable>
 	);
 };
 
